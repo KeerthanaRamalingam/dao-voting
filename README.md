@@ -104,12 +104,16 @@ POST /vote
 GET /results/:proposalId
 ```
 
+### 4. **Get Blockchain Data**
+```http
+GET /ledger
+```
+
 ## 📈 **Future Improvements**
+- ✅ Add metamask popup for confirmations
 - ✅ Requires Code scalability and testing
 - ✅ Add **Docker support** for containerized deployment
 - 💡 Implement **frontend visualizations** for the **blockchain ledger**
-- 📱 Develop a **mobile-friendly interface**
-
 ---
 
 

@@ -1,27 +1,43 @@
 [
     {
         "index": 0,
-        "timestamp": "1741331814977",
+        "timestamp": "1741333810727",
         "transactions": "Genesis Block",
         "previousHash": "0",
-        "hash": "a4967d84aca1ea472bfee2396c9db84d49cc9480c69a518d2a4610872b891824",
+        "hash": "ef8a920b32e309d7215a670368916567f8f71c4257e24ae8a6bcbd53ca49cec6",
         "nonce": 0
     },
     {
         "index": 1,
-        "timestamp": "1741331833059",
+        "timestamp": "1741333904515",
         "transactions": {
             "type": "proposal",
             "data": {
-                "description": "dsrg",
+                "description": "Test check 6",
                 "votingType": "0",
-                "endTime": "1741341666791"
+                "endTime": "1741433873"
             },
             "sender": "0x56762251D7c4D4E19a9bCE2BfF3C9209a74Ead35",
-            "timestamp": 1741331833057
+            "timestamp": 1741333904513
         },
-        "previousHash": "a4967d84aca1ea472bfee2396c9db84d49cc9480c69a518d2a4610872b891824",
-        "hash": "00fd198712c4089514ca96cc99c475607c0c11eab38f06bf744c85ed03a6bdd1",
-        "nonce": 10
+        "previousHash": "ef8a920b32e309d7215a670368916567f8f71c4257e24ae8a6bcbd53ca49cec6",
+        "hash": "00b03818d957f2a71d6a8255491e170b5d704be56ea5d06f320f65b1668de97a",
+        "nonce": 392
+    },
+    {
+        "index": 2,
+        "timestamp": "1741334160207",
+        "transactions": {
+            "type": "vote",
+            "data": {
+                "proposalId": "6",
+                "votes": "2"
+            },
+            "sender": "0x56762251D7c4D4E19a9bCE2BfF3C9209a74Ead35",
+            "timestamp": 1741334160207
+        },
+        "previousHash": "00b03818d957f2a71d6a8255491e170b5d704be56ea5d06f320f65b1668de97a",
+        "hash": "0080ccb1c3304301b9c445eddd375ca93724ee2fceb569ab7be1d040202dd35f",
+        "nonce": 380
     }
 ]

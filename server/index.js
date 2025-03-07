@@ -8,7 +8,7 @@ const { ethers } = require('ethers');
 const contractABI = require('../contracts/daoVoting.json'); // ABI of the deployed smart contract
 const Blockchain = require('../blockchain/blockchain');
 const Transaction = require('../blockchain/transaction');
-const Block = require('../blockchain/block');
+const Data = require('../data/blockchain');
 
 // Initialize Express App
 const app = express();
@@ -112,13 +112,21 @@ app.get('/results/:proposalId', async (req, res) => {
         const proposalId = req.params.proposalId;
         console.log("proposalid", proposalId);
         
-        var totalVotes = await daoVotingContract.getProposalVotes(proposalId);
+        const totalVotes = await daoVotingContract.getProposalVotes(proposalId);
         console.log("total votes", parseInt(totalVotes));
 
         res.json({ proposalId, totalVotes });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching results', error: error.message });
     }
+});
+
+// Get lockchain Data
+app.get('/ledger', (req, res) => {
+    console.log("here");
+    
+    console.log('Blockchain Ledger:', JSON.stringify(Data, null, 2));
+    res.json(Data);
 });
 
 

@@ -69,6 +69,15 @@
     <p id="resultsDisplay"></p>
     <hr>
 
+    <h2>Get Ledger data</h2>
+    <form id="ledgerData">
+        <button type="submit">Get Results</button>
+    </form>
+    <p id="ledger-output"></p>
+    <hr>
+
+  
+
     <script>
         let signer;
         let account;
@@ -195,6 +204,23 @@
                 console.error('Error fetching proposal results:', error);
             }
         });
+
+        // Get Ledger Data
+        document.getElementById('ledgerData').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(`http://localhost:3000/ledger`);
+                const data = await response.json();
+                
+                document.getElementById('ledger-output').innerText = JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                console.error('Error fetching ledger:', error);
+            }
+        });
+
+
 
     </script>
     
