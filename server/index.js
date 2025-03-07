@@ -126,6 +126,7 @@ app.get('/results/:proposalId', async (req, res) => {
 app.get('/ledger', (req, res) => {
     console.log("here");
     
+    console.log('Blockchain Ledger:', JSON.stringify(daoChain.chain, null, 2));
     console.log('Blockchain Ledger:', JSON.stringify(Data, null, 2));
     res.json(Data);
 });

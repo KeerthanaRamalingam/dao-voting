@@ -1,43 +1,43 @@
 [
     {
         "index": 0,
-        "timestamp": "1741333810727",
+        "timestamp": "1741341432669",
         "transactions": "Genesis Block",
         "previousHash": "0",
-        "hash": "ef8a920b32e309d7215a670368916567f8f71c4257e24ae8a6bcbd53ca49cec6",
+        "hash": "bf4357086330a2f5b1c65db46bf5b6526f4ca7f3db6a208585bb91a48ce60fdb",
         "nonce": 0
     },
     {
         "index": 1,
-        "timestamp": "1741333904515",
+        "timestamp": "1741341529029",
         "transactions": {
             "type": "proposal",
             "data": {
-                "description": "Test check 6",
+                "description": "Need protocol improvement",
                 "votingType": "0",
-                "endTime": "1741433873"
+                "endTime": "1741351507"
             },
             "sender": "0x56762251D7c4D4E19a9bCE2BfF3C9209a74Ead35",
-            "timestamp": 1741333904513
+            "timestamp": 1741341529027
         },
-        "previousHash": "ef8a920b32e309d7215a670368916567f8f71c4257e24ae8a6bcbd53ca49cec6",
-        "hash": "00b03818d957f2a71d6a8255491e170b5d704be56ea5d06f320f65b1668de97a",
-        "nonce": 392
+        "previousHash": "bf4357086330a2f5b1c65db46bf5b6526f4ca7f3db6a208585bb91a48ce60fdb",
+        "hash": "00afabfeffd8e007ffdb5b07f7d92ab2790e95667d12a94f0926f2a559fb970a",
+        "nonce": 330
     },
     {
         "index": 2,
-        "timestamp": "1741334160207",
+        "timestamp": "1741341632800",
         "transactions": {
             "type": "vote",
             "data": {
-                "proposalId": "6",
-                "votes": "2"
+                "proposalId": "7",
+                "votes": "1"
             },
             "sender": "0x56762251D7c4D4E19a9bCE2BfF3C9209a74Ead35",
-            "timestamp": 1741334160207
+            "timestamp": 1741341632800
         },
-        "previousHash": "00b03818d957f2a71d6a8255491e170b5d704be56ea5d06f320f65b1668de97a",
-        "hash": "0080ccb1c3304301b9c445eddd375ca93724ee2fceb569ab7be1d040202dd35f",
-        "nonce": 380
+        "previousHash": "00afabfeffd8e007ffdb5b07f7d92ab2790e95667d12a94f0926f2a559fb970a",
+        "hash": "004294be5f7ba6b2287ffac46d71dcfcb74f68c892394817007a11308b3cd62b",
+        "nonce": 294
     }
 ]
