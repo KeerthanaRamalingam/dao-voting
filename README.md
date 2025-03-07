@@ -110,8 +110,9 @@ GET /ledger
 ```
 
 ## 📈 **Future Improvements**
+- ✅ Token based voting power
 - ✅ Add metamask popup for confirmations
-- ✅ Requires Code scalability and testing
+- ✅ Requires Code scalability and security checks
 - ✅ Add **Docker support** for containerized deployment
 - 💡 Implement **frontend visualizations** for the **blockchain ledger**
 ---
