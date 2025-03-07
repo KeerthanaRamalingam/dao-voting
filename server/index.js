@@ -113,9 +113,10 @@ app.get('/results/:proposalId', async (req, res) => {
         console.log("proposalid", proposalId);
         
         const totalVotes = await daoVotingContract.getProposalVotes(proposalId);
-        console.log("total votes", parseInt(totalVotes));
+        const totalVotesInt = parseInt(totalVotes.toString());
+        console.log("total votes", parseInt(totalVotes), totalVotesInt);
 
-        res.json({ proposalId, totalVotes });
+        res.json({ proposalId, totalVotes:totalVotesInt });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching results', error: error.message });
     }
