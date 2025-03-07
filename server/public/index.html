@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DAO Voting System</title>
+</head>
+<body>
+    <h1>DAO Voting System</h1>
+    <button onclick="connectMetaMask()">Connect MetaMask</button>
+    <p id="account"></p>
+
+    <!-- Create Proposal Form -->
+    <h2>Create Proposal</h2>
+    <form id="createProposalForm">
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="votingType">Voting Type:</label><br>
+        <select id="votingType" name="votingType" required>
+            <option value="0">Single Choice</option>
+            <option value="1">Weighted</option>
+            <option value="2">Quadratic</option>
+            <option value="3">Approval</option>
+        </select><br><br>
+
+        <label for="endTime">End Time (Unix Timestamp):</label><br>
+        <input type="number" id="endTime" name="endTime" required><br><br>
+
+        <button type="submit">Create Proposal</button>
+    </form>
+
+    <p id="createResult"></p>
+
+    <hr>
+
+    <h2>Cast Your Vote</h2>
+    <form id="voteForm">
+        <label for="proposalId">Proposal ID:</label><br>
+        <input type="text" id="proposalId" name="proposalId" required><br><br>
+
+        <label for="votes">Number of Votes:</label><br>
+        <input type="number" id="votes" name="votes" required><br><br>
+
+        <button type="submit">Submit Vote</button>
+    </form>
+
+    <p id="voteResult"></p>
+
+    <hr>
+
+    <h2>Execute Proposal</h2>
+    <form id="executeProposalForm">
+        <label for="executeProposalId">Proposal ID:</label><br>
+        <input type="text" id="executeProposalId" name="executeProposalId" required><br><br>
+
+        <button type="submit">Execute Proposal</button>
+    </form>
+
+    <p id="executeResult"></p>
+
+    <hr>
+
+    <h2>Get Proposal Results</h2>
+    <form id="resultsForm">
+        <label for="resultProposalId">Proposal ID:</label><br>
+        <input type="text" id="resultProposalId" name="resultProposalId" required><br><br>
+
+        <button type="submit">Get Results</button>
+    </form>
+    <p id="resultsDisplay"></p>
+    <hr>
+
+    <script>
+        let signer;
+        let account;
+
+        // Connect MetaMask
+        async function connectMetaMask() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    document.getElementById("account").innerText = `Connected: ${accounts[0]}`;
+
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    console.log('Provider connected:', provider);
+                    signer = await provider.getSigner();
+                    account = await signer.getAddress();
+                } catch (error) {
+                    console.error('User denied account access:', error);
+                    document.getElementById("account").innerText = `Error: ${error.message}`;
+                }
+            } else {
+                alert("Please install MetaMask!");
+            }
+        }
+
+        // Submit Create Proposal
+        document.getElementById('createProposalForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const description = document.getElementById('description').value;
+            const votingType = document.getElementById('votingType').value;
+            const endTime = document.getElementById('endTime').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/proposals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ description, votingType, endTime, account }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('createResult').textContent = data.message;
+                } else {
+                    document.getElementById('createResult').textContent = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                console.error('Error creating proposal:', error);
+                document.getElementById('createResult').textContent = 'Failed to create proposal.';
+            }
+        });
+
+        // Submit Vote
+        document.getElementById('voteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const proposalId = document.getElementById('proposalId').value;
+            const votes = document.getElementById('votes').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/vote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ proposalId, votes, account }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('voteResult').textContent = data.message;
+                } else {
+                    document.getElementById('voteResult').textContent = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                console.error('Error submitting vote:', error);
+                document.getElementById('voteResult').textContent = 'Failed to submit vote.';
+            }
+        });
+
+        // Execute Proposal
+        document.getElementById('executeProposalForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const proposalId = document.getElementById('executeProposalId').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ proposalId, account }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('executeResult').textContent = data.message;
+                } else {
+                    document.getElementById('executeResult').textContent = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                console.error('Error executing proposal:', error);
+                document.getElementById('executeResult').textContent = 'Failed to execute proposal.';
+            }
+        });
+
+        // Get Proposal Results
+        document.getElementById('resultsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const proposalId = document.getElementById('resultProposalId').value;
+
+            try {
+                const response = await fetch(`http://localhost:3000/results/${proposalId}`);
+                const data = await response.json();
+                console.log("pid", data.proposalId);
+                
+                document.getElementById('resultsDisplay').textContent = `Proposal ${data.proposalId} has ${data.totalVotes} votes.`;
+            } catch (error) {
+                console.error('Error fetching proposal results:', error);
+            }
+        });
+
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</body>
+</html>

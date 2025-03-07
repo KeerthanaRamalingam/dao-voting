@@ -1,0 +1,27 @@
+[
+    {
+        "index": 0,
+        "timestamp": "1741331814977",
+        "transactions": "Genesis Block",
+        "previousHash": "0",
+        "hash": "a4967d84aca1ea472bfee2396c9db84d49cc9480c69a518d2a4610872b891824",
+        "nonce": 0
+    },
+    {
+        "index": 1,
+        "timestamp": "1741331833059",
+        "transactions": {
+            "type": "proposal",
+            "data": {
+                "description": "dsrg",
+                "votingType": "0",
+                "endTime": "1741341666791"
+            },
+            "sender": "0x56762251D7c4D4E19a9bCE2BfF3C9209a74Ead35",
+            "timestamp": 1741331833057
+        },
+        "previousHash": "a4967d84aca1ea472bfee2396c9db84d49cc9480c69a518d2a4610872b891824",
+        "hash": "00fd198712c4089514ca96cc99c475607c0c11eab38f06bf744c85ed03a6bdd1",
+        "nonce": 10
+    }
+]
